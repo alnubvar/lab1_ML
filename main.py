@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-# =========================
+
 # Загрузка данных
-# =========================
+
 df = pd.read_excel("Pumpkin_Seeds_Dataset.xlsx")
 
 # Создаем бинарный целевой признак
@@ -22,9 +22,8 @@ print(df["Target"].value_counts())
 feat = [col for col in df.columns if col not in ["Class", "Target"]]
 
 
-# =========================
 # Задание 1. Гистограммы
-# =========================
+
 os.makedirs("EDA_graphs/Task1", exist_ok=True)
 
 for col in feat:
@@ -44,9 +43,8 @@ for col in feat:
     plt.close()
 
 
-# =========================
 # Задание 2. Моды
-# =========================
+
 os.makedirs("EDA_graphs/Task2", exist_ok=True)
 
 multimodal_feat = []
@@ -80,9 +78,8 @@ for col in multimodal_feat:
     plt.close()
 
 
-# =========================
 # Задание 3. Дискретная компонента
-# =========================
+
 os.makedirs("EDA_graphs/Task3", exist_ok=True)
 
 print("Количество уникальных значений признаков:")
@@ -102,13 +99,12 @@ for col in feat:
     plt.close()
 
 
-# =========================
 # Задание 4. Другие графики
-# =========================
+
 os.makedirs("EDA_graphs/Task4", exist_ok=True)
 
 # 1. Круговая диаграмма распределения классов
-df["Target"].value_counts().plot.pie(autopct='%1.1f%%', figsize=(5,5))
+df["Target"].value_counts().plot.pie(autopct="%1.1f%%", figsize=(5, 5))
 plt.title("Распределение целевого признака Target")
 plt.ylabel("")
 plt.savefig("EDA_graphs/Task4/pie_target.png")
@@ -145,7 +141,7 @@ plt.savefig("EDA_graphs/Task4/scatter_compactness_solidity.png")
 plt.close()
 
 # 7. Корреляционная матрица
-plt.figure(figsize=(10,8))
+plt.figure(figsize=(10, 8))
 sns.heatmap(df.corr(numeric_only=True), annot=False, cmap="coolwarm")
 plt.title("Корреляционная матрица признаков")
 plt.savefig("EDA_graphs/Task4/heatmap_corr.png")
@@ -163,9 +159,9 @@ plt.savefig("EDA_graphs/Task4/violin_solidity.png")
 plt.close()
 
 # 10. KDE-график для Aspect_Ration
-plt.figure(figsize=(6,4))
-sns.kdeplot(df[df["Target"]==0]["Aspect_Ration"], shade=True, label="Target=0")
-sns.kdeplot(df[df["Target"]==1]["Aspect_Ration"], shade=True, label="Target=1")
+plt.figure(figsize=(6, 4))
+sns.kdeplot(df[df["Target"] == 0]["Aspect_Ration"], shade=True, label="Target=0")
+sns.kdeplot(df[df["Target"] == 1]["Aspect_Ration"], shade=True, label="Target=1")
 plt.title("KDE-график: Aspect_Ration по классам")
 plt.legend()
 plt.savefig("EDA_graphs/Task4/kde_aspect_ratio.png")
